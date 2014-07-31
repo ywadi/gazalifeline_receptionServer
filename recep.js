@@ -29,7 +29,7 @@ app.get('/service/liveMobs/getLive',function(req, res){
 //[[[Start Send Sms Routes]]]
 app.post('/service/sendSmsData',function(req,res){
 	//TODO: Send the data to storage module under libs 
-	storage.saveData(req.body.phoneNumber, req.body.Data, new Date(),function(response){
+	storage.saveData(req.body.userNumber, req.body.Data, req.body.relayPhone,new Date(),function(response){
 		res.send(response);
 	});
 })
