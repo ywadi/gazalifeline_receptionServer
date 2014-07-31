@@ -29,8 +29,8 @@ app.get('/service/liveMobs/getLive',function(req, res){
 //[[[Start Send Sms Routes]]]
 app.post('/service/sendSmsData',function(req,res){
 	//TODO: Send the data to storage module under libs 
-	storage.saveData(req.body.phoneNumber, "Data", "Date",function(data){
-		res.send(data);
+	storage.saveData(req.body.phoneNumber, req.body.Data, new Date(),function(response){
+		res.send(response);
 	});
 })
 //[[[End Send Sms Routes]]]
