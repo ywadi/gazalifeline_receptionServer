@@ -27,13 +27,46 @@ app.get('/service/liveMobs/getLive',function(req, res){
 //[[[END Ping Routes]]]
 
 //[[[Start Send Sms Routes]]]
-app.post('/service/sendSmsData',function(req,res){
+app.post('/service/sms/sendSmsData',function(req,res){
 	//TODO: Send the data to storage module under libs 
 	storage.saveData(req.body.userNumber, req.body.Data, req.body.relayPhone,new Date(),function(response){
 		res.send(response);
 	});
 })
 //[[[End Send Sms Routes]]]
+
+//[[[Start Get ALl Sms Routes]]]
+app.get('/service/sms/getSmsData/:limit/:skip',function(req, res){
+    storage.getAllData(parseInt(req.params.limit), parseInt(req.params.skip),function(data){
+       res.send(data); 
+    });
+});
+//[[[End Get All Sms Routes]]]
+
+//[[[Start Get Sms By Id Routes]]]
+app.get('/service/sms/getSms/:id',function(req, res){
+    storage.getSms(req.params.id,function(data){
+       res.send(data); 
+    });
+});
+//[[[End Get Sms Routes]]]
+
+//[[[Start Delete Sms By Id Routes]]]
+app.delete('/service/sms/deleteSms/:id',function(req, res){
+    storage.deleteSms(req.params.id,function(data){
+       res.send(data); 
+    });
+});
+//[[[End Delete Sms By Id Routes]]]
+
+//[[[Start Get Sms Count Routes]]]
+app.get('/service/sms/countSms',function(req, res){
+    storage.countSms(function(data){
+       res.send(data); 
+    });
+});
+//[[[End Delete Sms By Id Routes]]]
+
 
 //Start Server 
 app.listen(3000);
